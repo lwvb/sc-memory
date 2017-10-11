@@ -18,7 +18,6 @@ class Card extends Component {
   
   constructor(props) {
     super(props);
-    this.state = { flipped: false};
     this.flip = this.flip.bind(this);
   }
 
@@ -31,11 +30,18 @@ class Card extends Component {
   }
 
   flip() {
-    this.setState({ flipped: !this.state.flipped });
+    this.props.onFlip(this.props.number);
   }
 
   render() {
-    let classNames = this.state.flipped ? 'card flipped' : 'card'
+
+    let classNames = 'card';
+    if(this.props.flipped) {
+      classNames += ' flipped';
+    }
+    if(this.props.removed) {
+      classNames += ' removed';
+    }
     return (
       <div className={classNames} onClick={this.flip} >
         {this.getFaceImgTag()}

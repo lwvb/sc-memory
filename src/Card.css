@@ -5,6 +5,10 @@
   margin: 2em;
 }
 
+.card.removed {
+  background-color: white; 
+}
+
 .card img {
   display: none;
   max-width: 100%;

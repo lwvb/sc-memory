@@ -11,8 +11,6 @@ class App extends Component {
         </header>
        
         <Deck size={6} />
-
-        <Deck size={20} />
         
         
       </div>
