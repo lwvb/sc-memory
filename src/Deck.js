@@ -74,7 +74,7 @@ class Deck extends Component {
 
     cards[number].flipped = true;
     let flipped = this.getFlippedCards(cards);
-    if (flipped.length == 2) {
+    if (flipped.length === 2) {
       tries++;
       waiting = true;
       window.setTimeout(this.flipBack, 1000);
