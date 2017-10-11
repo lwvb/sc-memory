@@ -8,6 +8,7 @@ class Deck extends Component {
     super(props);
     this.state = { cards: this.generateCards(), tries: 0 };
     this.flipCard = this.flipCard.bind(this);
+    this.flipBack = this.flipBack.bind(this);
   }
 
   generateCards() {
@@ -39,25 +40,66 @@ class Deck extends Component {
     }, []);
   }
 
-  flipCard(number) {
-    let cards = this.state.cards.slice();
-    cards[number].flipped = true;
+  cardsLeft(cards) {
+    return cards.reduce((left, card) => {
+      if (!card.removed) {
+        left++;
+      }
+      return left;
+    }, 0);
+  }
 
+  flipBack() {
+    let cards = this.state.cards.slice();
     let flipped = this.getFlippedCards(cards);
-    if (flipped.length < 2) {
-      this.setState({ cards: cards });
+    if(flipped.length >= 2) {
+      flipped[0].flipped = false;
+      flipped[1].flipped = false;
+      this.setState({ cards: cards, waiting: false });
+    }
+  }
+
+  flipCard(number) {
+    if(this.state.cards[number].removed) {
       return;
     }
-    if (flipped[0].type === flipped[1].type) {
-      flipped[0].removed = true;
-      flipped[1].removed = true;
-    } 
-    flipped[0].flipped = false;
-    flipped[1].flipped = false;
-    this.setState({ cards: cards, tries: this.state.tries + 1 });
+    if(this.state.waiting) {
+      this.flipBack();
+    }
+
+    let cards = this.state.cards.slice();
+    let tries = this.state.tries;
+    let waiting = false;
+    let done = undefined;
+    
+   
+    cards[number].flipped = true;
+    let flipped = this.getFlippedCards(cards);
+    if (flipped.length == 2) {
+      tries++;
+      waiting = true;
+      window.setTimeout(this.flipBack,1000);
+
+      if (flipped[0].type === flipped[1].type) {
+        flipped[0].removed = true;
+        flipped[1].removed = true;
+      }
+      if(this.cardsLeft(cards) === 0) {
+        done = this.props.win(this.state.tries);
+      } 
+    }
+    this.setState({ cards, tries, waiting, done });
   }
 
   render() {
+    if(this.state.done) {
+      return (
+        <div className="deck">
+          <p>{this.state.done}</p>
+        </div>
+      );
+    }
+
     return (
       <div className="deck">
         {this.state.cards.map((card, index) => (
