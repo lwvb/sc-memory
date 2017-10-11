@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './Card';
+import Deck from './Deck';
 import './App.css';
 
 class App extends Component {
@@ -10,11 +10,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
        
-        <Card type={0} />
-        <Card type={1} />
-        <Card type={2} />
-        <Card type={3} />
-        <Card type={4} />
+        <Deck size={6} />
+
+        <Deck size={20} />
         
         
       </div>
