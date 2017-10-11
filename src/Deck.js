@@ -52,7 +52,7 @@ class Deck extends Component {
   flipBack() {
     let cards = this.state.cards.slice();
     let flipped = this.getFlippedCards(cards);
-    if(flipped.length >= 2) {
+    if (flipped.length >= 2) {
       flipped[0].flipped = false;
       flipped[1].flipped = false;
       this.setState({ cards: cards, waiting: false });
@@ -60,10 +60,10 @@ class Deck extends Component {
   }
 
   flipCard(number) {
-    if(this.state.cards[number].removed) {
+    if (this.state.cards[number].removed) {
       return;
     }
-    if(this.state.waiting) {
+    if (this.state.waiting) {
       this.flipBack();
     }
 
@@ -71,28 +71,27 @@ class Deck extends Component {
     let tries = this.state.tries;
     let waiting = false;
     let done = undefined;
-    
-   
+
     cards[number].flipped = true;
     let flipped = this.getFlippedCards(cards);
     if (flipped.length == 2) {
       tries++;
       waiting = true;
-      window.setTimeout(this.flipBack,1000);
+      window.setTimeout(this.flipBack, 1000);
 
       if (flipped[0].type === flipped[1].type) {
         flipped[0].removed = true;
         flipped[1].removed = true;
       }
-      if(this.cardsLeft(cards) === 0) {
+      if (this.cardsLeft(cards) === 0) {
         done = this.props.win(this.state.tries);
-      } 
+      }
     }
     this.setState({ cards, tries, waiting, done });
   }
 
   render() {
-    if(this.state.done) {
+    if (this.state.done) {
       return (
         <div className="deck-done" onClick={this.props.restart}>
           <p>{this.state.done}</p>

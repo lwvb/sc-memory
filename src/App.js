@@ -44,7 +44,12 @@ class App extends Component {
           <p>{highscoreMessage}</p>
           <button onClick={this.restart}> Restart </button>
         </header>
-        <Deck size={this.state.size} key={this.state.game} win={this.win} restart={this.restart} />
+        <Deck
+          size={this.state.size}
+          key={this.state.game}
+          win={this.win}
+          restart={this.restart}
+        />
       </div>
     );
   }

@@ -17,10 +17,11 @@
 }
 
 .card.removed {
-  background-color: inherit; 
+  background-color: inherit;
 }
 
-.card img, .card.flipped.removed img {
+.card img,
+.card.flipped.removed img {
   visibility: hidden;
   display: block;
   opacity: 0;
@@ -30,7 +31,7 @@
   transition: visibility 0s, opacity 0.5s linear;
 }
 
-.card.flipped img{
+.card.flipped img {
   visibility: visible;
   opacity: 1;
 }

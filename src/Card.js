@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './Card.css';
+import "./Card.css";
 
 class Card extends Component {
   static typeNameMap = [
-    'angular',
-    'd3',
-    'jenkins',
-    'postcss',
-    'react',
-    'redux',
-    'sass',
-    'supercharge',
-    'ts',
-    'webpack'  
-  ]
-  
+    "angular",
+    "d3",
+    "jenkins",
+    "postcss",
+    "react",
+    "redux",
+    "sass",
+    "supercharge",
+    "ts",
+    "webpack"
+  ];
+
   constructor(props) {
     super(props);
     this.flip = this.flip.bind(this);
@@ -23,10 +23,8 @@ class Card extends Component {
 
   getFaceImgTag() {
     let name = Card.typeNameMap[this.props.type];
-    let src = './assets/'+ name + '.png';
-    return (
-      <img src={src} alt={name} />
-    );
+    let src = "./assets/" + name + ".png";
+    return <img src={src} alt={name} />;
   }
 
   flip() {
@@ -34,16 +32,15 @@ class Card extends Component {
   }
 
   render() {
-
-    let classNames = 'card';
-    if(this.props.flipped) {
-      classNames += ' flipped';
+    let classNames = "card";
+    if (this.props.flipped) {
+      classNames += " flipped";
     }
-    if(this.props.removed) {
-      classNames += ' removed';
+    if (this.props.removed) {
+      classNames += " removed";
     }
     return (
-      <div className={classNames} onClick={this.flip} >
+      <div className={classNames} onClick={this.flip}>
         {this.getFaceImgTag()}
       </div>
     );
