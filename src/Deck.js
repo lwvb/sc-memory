@@ -94,8 +94,9 @@ class Deck extends Component {
   render() {
     if(this.state.done) {
       return (
-        <div className="deck">
+        <div className="deck-done" onClick={this.props.restart}>
           <p>{this.state.done}</p>
+          <p>Click to restart</p>
         </div>
       );
     }
